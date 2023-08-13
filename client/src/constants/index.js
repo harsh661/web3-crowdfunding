@@ -11,18 +11,18 @@ export const navlinks = [
     {
       name: 'campaign',
       icon: FiRadio,
-      link: '/create-campaign',
+      link: '/create',
     },
     {
       name: 'payment',
       icon: FiDollarSign,
-      link: '/',
+      link: '/payment',
       disabled: true,
     },
     {
       name: 'withdraw',
       icon: BiMoneyWithdraw,
-      link: '/',
+      link: '/withdraw',
       disabled: true,
     },
     {
@@ -33,7 +33,7 @@ export const navlinks = [
     {
       name: 'logout',
       icon: BiLogOut,
-      link: '/',
+      link: '',
       disabled: true,
     },
   ];

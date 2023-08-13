@@ -1,7 +1,7 @@
 import "./styles/globals.css"
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"
 
-import { Home, Profile } from "./pages"
+import { Home, Profile, Create } from "./pages"
 import { Navbar, Sidebar } from "./components"
 
 const Layout = () => {
@@ -30,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/create",
+        element: <Create />
       }
     ],
   },
