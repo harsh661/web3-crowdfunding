@@ -1,7 +1,7 @@
 import "./styles/globals.css"
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"
 
-import { Home } from "./pages"
+import { Home, Profile } from "./pages"
 import { Sidebar } from "./components"
 
 const Layout = () => {
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       }
     ],
   },

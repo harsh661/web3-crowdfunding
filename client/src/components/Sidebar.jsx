@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { navlinks } from "../constants"
 import {SiBlockchaindotcom} from 'react-icons/si'
+import { useNavigate } from "react-router"
 
 const NavItem = ({ name, icon: Icon, link, disabled, isActive, onClick }) => {
   const active = isActive === name
@@ -21,6 +22,7 @@ const NavItem = ({ name, icon: Icon, link, disabled, isActive, onClick }) => {
 
 const Sidebar = () => {
   const [isActive, setIsActive] = useState("dashboard")
+  const navigate = useNavigate()
 
   return (
     <div className="p-3">
@@ -36,6 +38,7 @@ const Sidebar = () => {
            onClick={() => {
             if(!item.disabled) {
                 setIsActive(item.name)
+                navigate(item.link)
             }
            }}
          />
