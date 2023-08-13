@@ -10,7 +10,7 @@ const NavItem = ({ name, icon: Icon, link, disabled, isActive, onClick }) => {
       onClick={onClick}
       className={`${
         active && "bg-gray-border/50"
-      } ${disabled && 'opacity-50'} p-2 text-gray-text hover:text-warm-white hover:bg-gray-border/50 rounded-md relative group flex items-center transition-all duration-200`}
+      } ${disabled ? 'opacity-50 cursor-not-allowed': 'cursor-pointer'} p-2 text-gray-text hover:text-warm-white hover:bg-gray-border/50 rounded-md relative group flex items-center transition-all duration-200`}
     >
       <Icon size={25} />
       <span className="text-xs bg-dark-alt p-2 absolute ml-10 rounded-sm hidden group-hover:flex">
