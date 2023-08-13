@@ -28,7 +28,7 @@ const Navbar = () => {
         </div>
 
         <div className="max-w-md w-full hidden md:flex">
-          <Search />
+          <Search placeholder={'Search for a campaign'}/>
         </div>
 
         {/* Hamburger icon to toggle menu */}
