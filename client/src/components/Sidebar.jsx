@@ -1,15 +1,14 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { navlinks } from "../constants"
 import {SiBlockchaindotcom} from 'react-icons/si'
-import { useNavigate } from "react-router"
+import { useLocation, useNavigate, useParams } from "react-router"
 
 const NavItem = ({ name, icon: Icon, link, disabled, isActive, onClick }) => {
-  const active = isActive === name
   return (
     <div
       onClick={onClick}
       className={`${
-        active && "bg-gray-border/50"
+        isActive && "bg-gray-border/50"
       } ${disabled ? 'opacity-50 cursor-not-allowed': 'cursor-pointer'} p-2 text-gray-text hover:text-warm-white hover:bg-gray-border/50 rounded-md relative group flex items-center transition-all duration-200`}
     >
       <Icon size={25} />
@@ -23,6 +22,11 @@ const NavItem = ({ name, icon: Icon, link, disabled, isActive, onClick }) => {
 const Sidebar = () => {
   const [isActive, setIsActive] = useState("dashboard")
   const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    setIsActive(location.pathname)
+  }, [location.pathname])
 
   return (
     <div className="p-3 hidden md:flex">
@@ -34,7 +38,7 @@ const Sidebar = () => {
           <NavItem
            key={item.name} 
            {...item} 
-           isActive={isActive}
+           isActive={isActive === item.link}
            onClick={() => {
             if(!item.disabled) {
                 setIsActive(item.name)
