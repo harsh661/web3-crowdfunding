@@ -2,7 +2,7 @@ import "./styles/globals.css"
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom"
 
 import { Home, Profile } from "./pages"
-import { Sidebar } from "./components"
+import { Navbar, Sidebar } from "./components"
 
 const Layout = () => {
   return (
@@ -10,7 +10,8 @@ const Layout = () => {
       <div className="border-r border-gray-border">
         <Sidebar />
       </div>
-      <div className="flex-1 p-5">
+      <div className="flex-1">
+        <Navbar />
         <Outlet />
       </div>
     </div>

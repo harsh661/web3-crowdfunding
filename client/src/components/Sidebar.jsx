@@ -25,7 +25,7 @@ const Sidebar = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="p-3">
+    <div className="p-3 hidden md:flex">
       <div className="flex flex-col items-center gap-5">
         <div className="py-3 text-accent">
             <SiBlockchaindotcom size={20}/>
