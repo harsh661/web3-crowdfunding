@@ -7,15 +7,17 @@ const Input = ({
   errors,
   type,
   validation,
-  textArea,
+  textarea,
+  step,
+  min
 }) => {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={name} className="text-sm text-gray-text">
+      <label htmlFor={name} className={`text-sm text-gray-text`}>
         {label}
       </label>
-      {textArea ? (
-        <textArea
+      {textarea ? (
+        <textarea
           type={type}
           id={name}
           {...register(name, validation)}
@@ -26,6 +28,8 @@ const Input = ({
         <input
           type={type}
           id={name}
+          step={step}
+          min={min}
           {...register(name, validation)}
           className="bg-transparent p-2 text-sm w-full outline-none border border-gray-border rounded-md"
           required

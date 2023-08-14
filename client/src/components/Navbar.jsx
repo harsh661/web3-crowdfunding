@@ -5,6 +5,7 @@ import Button from "./Button"
 import { navlinks } from "../constants"
 import Search from "./Search"
 import { useNavigate } from "react-router"
+import { useContractContext } from "../context"
 
 const NavItem = ({ name, icon: Icon, link, disabled }) => {
   return (
@@ -20,8 +21,7 @@ const NavItem = ({ name, icon: Icon, link, disabled }) => {
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
-
-  const address = "0xakdsjfladf"
+  const {address, connect} = useContractContext()
 
   return (
     // Wrapper for navbar
@@ -49,7 +49,9 @@ const Navbar = () => {
             label={address ? 'Create a campaign': 'Connect your wallet'} 
             onClick={() => {
               if(address) {navigate('/create')}
-              else navigate('/')
+              else {
+                connect()
+              }
             }}
           />
         </div>
