@@ -6,6 +6,7 @@ import { navlinks } from "../constants"
 import Search from "./Search"
 import { useNavigate } from "react-router"
 import { useContractContext } from "../context"
+import { Link } from 'react-router-dom'
 
 const NavItem = ({ name, icon: Icon, link, disabled }) => {
   return (
@@ -21,19 +22,19 @@ const NavItem = ({ name, icon: Icon, link, disabled }) => {
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
-  const {address, connect} = useContractContext()
-
+  const { address, connect } = useContractContext()
+  console.log(address)
   return (
     // Wrapper for navbar
     <div className="w-full relative h-16">
       {/* Navbar */}
-      <div className="px-3 md:px-5 lg:px-10 h-16 flex items-center justify-between fixed md:static w-full z-50 bg-dark-main border-b border-gray-border">
+      <div className="px-3 md:px-5 lg:px-10 h-16 flex items-center justify-between gap-5 fixed md:static w-full z-50 bg-dark-main border-b border-gray-border">
         <div className="text-accent md:hidden">
           <SiBlockchaindotcom size={20} />
         </div>
 
         <div className="max-w-md w-full hidden md:flex">
-          <Search placeholder={'Search for a campaign'}/>
+          <Search placeholder={"Search for a campaign"} />
         </div>
 
         {/* Hamburger icon to toggle menu */}
@@ -45,15 +46,16 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex">
-          <Button 
-            label={address ? 'Create a campaign': 'Connect your wallet'} 
-            onClick={() => {
-              if(address) {navigate('/create')}
-              else {
-                connect()
-              }
-            }}
-          />
+          {address ? (
+            <Link to={'/profile'} className="flex items-center gap-2 text-xs text-gray-text bg-dark-alt hover:bg-gray-border/80 rounded-md py-2 px-3 w-60 cursor-pointer">
+              <img src="/metamask.svg" alt="Metamask" className="w-5 h-5" />
+              <span className="flex-[2] pr-1 overflow-hidden truncate">
+                {address}
+              </span>
+            </Link>
+          ) : (
+            <Button label={"Connect your wallet"} onClick={() => connect()} />
+          )}
         </div>
       </div>
 
@@ -67,11 +69,14 @@ const Navbar = () => {
           <NavItem key={item.name} {...item} />
         ))}
         <div className="pt-2">
-          <Button 
-            label={address ? 'Create a campaign': 'Connect your wallet'}
+          <Button
+            label={address ? "Create a campaign" : "Connect your wallet"}
             onClick={() => {
-              if(address) {navigate('/create')}
-              else navigate('/')
+              if (address) {
+                navigate("/create")
+              } else {
+                connect()
+              }
             }}
           />
         </div>
