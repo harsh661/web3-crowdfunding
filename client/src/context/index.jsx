@@ -54,6 +54,30 @@ export const ContractContextProvider = ({ children }) => {
     return parseData
   }
 
+  const fundCampaign = async (id, amount) => {
+    const data = await contract.call('donateToCampaign', [id], {
+      value: ethers.utils.parseEther(amount)})
+
+    return data
+  }
+
+  const getSupporters = async (id) => {
+    const supporters = await contract.call('getDonators', [id])
+
+    const numberOfSupporters = supporters[0].length
+
+    const donations = []
+    
+    for (let i = 0; i < numberOfSupporters; i++) {
+      donations.push({
+        donator: supporters[0][i],
+        donation: ethers.utils.formatEther(supporters[1][i]).toString()
+      })
+    }
+
+    return donations
+  }
+
   return (
     <ContractContext.Provider
       value={{
@@ -62,6 +86,8 @@ export const ContractContextProvider = ({ children }) => {
         contract,
         createCampaign: publishCampaign,
         getCampaigns,
+        fundCampaign,
+        getSupporters,
       }}
     >
       {children}
