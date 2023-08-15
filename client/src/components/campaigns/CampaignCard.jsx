@@ -12,11 +12,11 @@ const CampaignCard = ({ owner, title, description, image, target, deadline, amou
       <img
         src={image}
         alt={title}
-        className="w-full aspect-video object-cover rounded-xl"
+        className="w-full aspect-video object-cover rounded-xl border border-gray-border"
       />
       <div className="p-3">
-        <h2 className="text-sm text-white line-clamp-1 font-medium">{title}</h2>
-        <p className="text-xs text-gray-text line-clamp-2">{description}</p>
+        <h2 className="text-white line-clamp-1 font-medium">{title}</h2>
+        <p className="text-xs text-gray-text line-clamp-2 mt-1">{description}</p>
       </div>
       <div className="p-3 flex items-center justify-between">
         <div className="flex flex-col gap-0">
