@@ -6,7 +6,7 @@ import { FiUsers, FiClock } from "react-icons/fi"
 import { daysLeft } from "../utils"
 import Button from "../components/Button"
 import { useContractContext } from "../context"
-import {toast} from 'react-hot-toast'
+import { toast } from "react-hot-toast"
 
 const CampaignPage = () => {
   const { state } = useLocation()
@@ -14,10 +14,12 @@ const CampaignPage = () => {
   const [amount, setAmount] = useState(0.01)
   const [supporters, setSupporters] = useState([])
 
-  const { fundCampaign, getSupporters } = useContractContext()
+  const { contract, fundCampaign, getSupporters } = useContractContext()
 
   useEffect(() => {
-    fetchSupporters()
+    if (contract) {
+      fetchSupporters()
+    }
   }, [])
 
   const fetchSupporters = async () => {
@@ -27,10 +29,10 @@ const CampaignPage = () => {
   }
 
   const handleDonation = async () => {
-    toast.loading('Processing payment')
+    toast.loading("Processing payment")
     await fundCampaign(state.id, amount)
     toast.dismiss()
-    toast.success('Thank you for donating')
+    toast.success("Thank you for donating")
   }
 
   return (
@@ -77,7 +79,16 @@ const CampaignPage = () => {
       </div>
 
       <Heading title={"Our Story"} />
-      <p className="text-gray-text">{state.description}</p>
+      <p className="text-gray-text py-5">{state.description}</p>
+
+      <Heading title={"Who supports us"} />
+      <div className="flex flex-col gap-5 w-full">
+        {supporters.map((supporter) => (
+          <p className="text-white text-xs md:text-sm flex items-center gap-2 overflow-hidden">
+            <span className="truncate">{supporter.donator}</span>
+          </p>
+        ))}
+      </div>
 
       <div className="flex flex-col gap-10 p-10 bg-dark-alt rounded-xl my-10">
         <Heading
@@ -95,7 +106,7 @@ const CampaignPage = () => {
             className="bg-transparent p-2 text-xl w-full max-w-lg outline-none border border-gray-text/50 rounded-md"
             min={0.01}
           />
-          <Button onClick={handleDonation} label={"Support"} large/>
+          <Button onClick={handleDonation} label={"Support"} large />
         </div>
       </div>
     </div>
