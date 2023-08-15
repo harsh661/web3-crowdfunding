@@ -100,7 +100,7 @@ const CampaignPage = () => {
             >
               <PiUserCircle size={20} className="text-accent" />
               <p className="text-xs text-gray-text overflow-hidden">
-                {supporter.donator.slice(20) + '...'}
+                {supporter.donator.slice(0, 30) + '...'}
               </p>
             </div>
           ))}
