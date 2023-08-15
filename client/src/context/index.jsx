@@ -58,7 +58,7 @@ export const ContractContextProvider = ({ children }) => {
     const data = await contract.call('donateToCampaign', [id], {
       value: ethers.utils.parseEther(amount)})
 
-    return data
+    console.log(data)
   }
 
   const getSupporters = async (id) => {

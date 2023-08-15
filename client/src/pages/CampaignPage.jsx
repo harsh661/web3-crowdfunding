@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { useLocation } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import Heading from "../components/Heading"
 import ProgressBar from "../components/campaigns/ProgressBar.jsx"
 import { FiUsers, FiClock } from "react-icons/fi"
+import { PiUserCircle } from "react-icons/pi"
 import { daysLeft } from "../utils"
 import Button from "../components/Button"
 import { useContractContext } from "../context"
@@ -10,17 +11,19 @@ import { toast } from "react-hot-toast"
 
 const CampaignPage = () => {
   const { state } = useLocation()
+  const navigate = useNavigate()
   const remainingDays = daysLeft(state.deadline)
-  const [amount, setAmount] = useState(0.01)
+  const [amount, setAmount] = useState('')
   const [supporters, setSupporters] = useState([])
 
-  const { contract, fundCampaign, getSupporters } = useContractContext()
+  const { contract, address, fundCampaign, getSupporters } = useContractContext()
 
   useEffect(() => {
     if (contract) {
       fetchSupporters()
     }
-  }, [])
+    console.log(address)
+  }, [contract])
 
   const fetchSupporters = async () => {
     const data = await getSupporters(state.id)
@@ -32,6 +35,7 @@ const CampaignPage = () => {
     toast.loading("Processing payment")
     await fundCampaign(state.id, amount)
     toast.dismiss()
+    navigate("/")
     toast.success("Thank you for donating")
   }
 
@@ -82,13 +86,25 @@ const CampaignPage = () => {
       <p className="text-gray-text py-5">{state.description}</p>
 
       <Heading title={"Who supports us"} />
-      <div className="flex flex-col gap-5 w-full">
-        {supporters.map((supporter) => (
-          <p className="text-white text-xs md:text-sm flex items-center gap-2 overflow-hidden">
-            <span className="truncate">{supporter.donator}</span>
-          </p>
-        ))}
-      </div>
+      {supporters.length > 0 ? (
+        <>
+          {supporters.map((supporter, i) => (
+            <div
+              key={supporter.donator + i}
+              className="flex items-center gap-1 py-3 overflow-hidden"
+            >
+              <PiUserCircle size={20} className="text-accent" />
+              <p className="text-xs text-gray-text overflow-hidden">
+                {supporter.donator.slice(20) + '...'}
+              </p>
+            </div>
+          ))}
+        </>
+      ) : (
+        <p className="text-white text-xs md:text-sm">
+          Be the first one to donate
+        </p>
+      )}
 
       <div className="flex flex-col gap-10 p-10 bg-dark-alt rounded-xl my-10">
         <Heading
