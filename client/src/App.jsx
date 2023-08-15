@@ -10,7 +10,7 @@ const Layout = () => {
       <div className="border-r border-gray-border">
         <Sidebar />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 h-[100dvh] overflow-scroll">
         <Navbar />
         <Outlet />
       </div>

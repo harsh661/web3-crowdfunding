@@ -38,7 +38,7 @@ const Navbar = () => {
   const { address, connect } = useContractContext()
   return (
     // Wrapper for navbar
-    <div className="w-full h-16">
+    <div className="w-full h-16 sticky top-0">
       {/* Navbar */}
       <div className="px-3 md:px-5 lg:px-10 h-16 flex items-center justify-between gap-5 fixed md:static w-full bg-dark-main border-b border-gray-border">
         <div className="md:hidden">
