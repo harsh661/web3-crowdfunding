@@ -22,7 +22,6 @@ const CampaignPage = () => {
     if (contract) {
       fetchSupporters()
     }
-    console.log(address)
   }, [contract])
 
   const fetchSupporters = async () => {
