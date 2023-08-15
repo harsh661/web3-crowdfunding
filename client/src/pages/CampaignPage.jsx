@@ -22,7 +22,7 @@ const CampaignPage = () => {
     if (contract) {
       fetchSupporters()
     }
-  }, [contract])
+  }, [contract, address])
 
   const fetchSupporters = async () => {
     const data = await getSupporters(state.id)
