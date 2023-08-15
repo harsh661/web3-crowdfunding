@@ -6,7 +6,6 @@ import ProgressBar from "./ProgressBar"
 const CampaignCard = ({
   owner,
   title,
-  description,
   image,
   target,
   deadline,
@@ -17,7 +16,6 @@ const CampaignCard = ({
   return (
     <div className="border border-gray-border bg-dark-alt/70 text-warm-white rounded-xl px-2">
       <div className="flex items-center gap-1 p-3 overflow-hidden">
-        {/* <span className="text-xs text-white">Started by</span> */}
         <PiUserCircle size={20} className="text-accent" />
         <span className="text-xs text-gray-text truncate">{owner}</span>
       </div>
@@ -32,7 +30,7 @@ const CampaignCard = ({
       </div>
 
       <div className="p-3">
-        <ProgressBar goal={target} raisedAmount={amountCollected}/>
+        <ProgressBar goal={target} raisedAmount={amountCollected} />
       </div>
       <div className="p-3 flex items-center justify-between">
         <div className="flex flex-col gap-0">
@@ -41,12 +39,14 @@ const CampaignCard = ({
           </h2>
           <p className="text-xs text-gray-text">Collected of {target} ETH</p>
         </div>
-        <div className="flex flex-col gap-0">
-          <h2 className="text-lg font-bold text-white">
-            {remainingDays} {remainingDays > 1 ? "days" : "day"}
-          </h2>
-          <p className="text-xs text-gray-text">Remaining</p>
-        </div>
+        {remainingDays > 0 && (
+          <div className="flex flex-col gap-0">
+            <h2 className="text-lg font-bold text-white">
+              {remainingDays} {remainingDays > 1 ? "days" : "day"}
+            </h2>
+            <p className="text-xs text-gray-text">Remaining</p>
+          </div>
+        )}
       </div>
     </div>
   )

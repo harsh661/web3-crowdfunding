@@ -13,10 +13,11 @@ const CampaignPage = () => {
   const { state } = useLocation()
   const navigate = useNavigate()
   const remainingDays = daysLeft(state.deadline)
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState("")
   const [supporters, setSupporters] = useState([])
 
-  const { contract, address, fundCampaign, getSupporters } = useContractContext()
+  const { contract, address, fundCampaign, getSupporters } =
+    useContractContext()
 
   useEffect(() => {
     if (contract) {
@@ -39,7 +40,7 @@ const CampaignPage = () => {
       navigate("/")
     } catch (error) {
       toast.dismiss()
-      toast.error('Transaction cancelled')
+      toast.error("Transaction cancelled")
     }
   }
 
@@ -81,7 +82,11 @@ const CampaignPage = () => {
         <div className="flex items-center gap-2">
           <FiClock color="gray" />
           <span className="font-medium">
-            {remainingDays} {remainingDays > 1 ? "days" : "day"} remaining
+            {remainingDays > 0
+              ? `${remainingDays} ${
+                  remainingDays > 1 ? "days" : "day"
+                } remaining`
+              : "Finished"}
           </span>
         </div>
       </div>
@@ -99,36 +104,40 @@ const CampaignPage = () => {
             >
               <PiUserCircle size={20} className="text-accent" />
               <p className="text-xs text-gray-text overflow-hidden">
-                {supporter.donator.slice(0, 30) + '...'}
+                {supporter.donator.slice(0, 30) + "..."}
               </p>
             </div>
           ))}
         </>
       ) : (
         <p className="text-white text-xs md:text-sm">
-          Be the first one to donate
+          {daysLeft > 0 ? "Be the first one to donate" : "No Donators"}
         </p>
       )}
 
-      <div className="flex flex-col gap-10 p-10 bg-dark-alt rounded-xl my-10">
-        <Heading
-          title={"Be a Force for Good"}
-          subtitle={
-            "Your Generous Donation Has the Power to Create Meaningful and Lasting Positive Change"
-          }
-        />
-        <div className="flex items-center gap-5">
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            step={0.01}
-            className="bg-transparent p-2 text-xl w-full max-w-lg outline-none border border-gray-text/50 rounded-md"
-            min={0.01}
+      {/* If days remain show donation box */}
+
+      {remainingDays > 0 && (
+        <div className="flex flex-col gap-10 p-10 bg-dark-alt rounded-xl my-10">
+          <Heading
+            title={"Be a Force for Good"}
+            subtitle={
+              "Your Generous Donation Has the Power to Create Meaningful and Lasting Positive Change"
+            }
           />
-          <Button onClick={handleDonation} label={"Support"} large />
+          <div className="flex items-center gap-5">
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              step={0.01}
+              className="bg-transparent p-2 text-xl w-full max-w-lg outline-none border border-gray-text/50 rounded-md"
+              min={0.01}
+            />
+            <Button onClick={handleDonation} label={"Support"} large />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
