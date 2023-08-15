@@ -29,11 +29,5 @@ export const navlinks = [
       name: 'profile',
       icon: FiUser,
       link: '/profile',
-    },
-    {
-      name: 'logout',
-      icon: BiLogOut,
-      link: '',
-      disabled: true,
-    },
+    }
   ];
