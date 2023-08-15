@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useContractContext } from "../context"
 import CampaignsGrid from "../components/campaigns/CampaignsGrid"
 import Heading from "../components/Heading.jsx"
+import Button from "../components/Button"
 
 const Profile = () => {
   const [data, setData] = useState([])
@@ -21,6 +22,14 @@ const Profile = () => {
       fetchCampaigns()
     }
   }, [address, contract])
+
+  if(!address) {
+    return (
+      <div className="flex flex-col items-center justify-center fixed -z-10 inset-0 top-16">
+        <Heading title={'You are not signed in'} subtitle={'Connect wallet to get started'} centered/>
+      </div>
+    )
+  }
 
   return (
     <div className="p-5 max-w-7xl mx-auto">
