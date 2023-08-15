@@ -7,7 +7,7 @@ import { Navbar, Sidebar } from "./components"
 const Layout = () => {
   return (
     <div className="relative min-h-screen flex">
-      <div className="border-r border-gray-border">
+      <div className="border-r border-gray-border hidden md:block">
         <Sidebar />
       </div>
       <div className="flex-1 h-[100dvh] overflow-scroll">

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { navlinks } from "../constants"
 import {SiBlockchaindotcom} from 'react-icons/si'
-import { useLocation, useNavigate, useParams } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 
-const NavItem = ({ name, icon: Icon, link, disabled, isActive, onClick }) => {
+const NavItem = ({ name, icon: Icon, disabled, isActive, onClick }) => {
   return (
     <div
       onClick={onClick}
@@ -29,7 +29,7 @@ const Sidebar = () => {
   }, [location.pathname])
 
   return (
-    <div className="p-3 hidden md:flex">
+    <div className="p-3 flex">
       <div className="flex flex-col items-center gap-5">
         <div className="py-3 text-accent">
             <SiBlockchaindotcom size={20}/>
