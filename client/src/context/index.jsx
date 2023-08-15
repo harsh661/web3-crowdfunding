@@ -51,7 +51,7 @@ export const ContractContextProvider = ({ children }) => {
       image: campaign.image
     }))
 
-    return parseData
+    return parseData.reverse()
   }
 
   const fundCampaign = async (id, amount) => {

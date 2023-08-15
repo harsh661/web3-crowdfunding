@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div className="p-5 max-w-7xl mx-auto">
-        <Heading title="Ongoing Campaigns" subtitle="Discover all ongoing campaings and donate"/>
+        <Heading title="All Campaigns" subtitle="Discover all ongoing campaings and donate"/>
         <CampaignsGrid data={data} loading={loading} />
     </div>
   )
