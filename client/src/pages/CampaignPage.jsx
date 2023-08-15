@@ -33,10 +33,15 @@ const CampaignPage = () => {
 
   const handleDonation = async () => {
     toast.loading("Processing payment")
-    await fundCampaign(state.id, amount)
-    toast.dismiss()
-    navigate("/")
-    toast.success("Thank you for donating")
+    try {
+      await fundCampaign(state.id, amount)
+      toast.dismiss()
+      toast.success("Thank you for donating")
+      navigate("/")
+    } catch (error) {
+      toast.dismiss()
+      toast.error('Transaction cancelled')
+    }
   }
 
   return (
